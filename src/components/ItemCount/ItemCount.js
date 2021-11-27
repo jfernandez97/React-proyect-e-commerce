@@ -1,15 +1,8 @@
 import React, { useState } from "react";
+import { useCounter } from "../../hooks/useCounter";
 
 export const ItemCount = ({ stock = 10, initial = 0 }) => {
-  const [amount, setAmount] = useState(initial);
-
-  const handleSub = () => {
-    amount > initial && setAmount(amount - 1);
-  };
-
-  const handleAdd = () => {
-    amount < stock && setAmount(amount + 1);
-  };
+  const { amount, handleAdd, handleSub } = useCounter(initial, stock);
 
   return (
     <div className="m-4">
