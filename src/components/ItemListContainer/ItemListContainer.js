@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { askData } from "../../helpers/askData";
+import { ItemList } from "../ItemList/ItemList";
 
 export const ItemListContainer = () => {
   const [items, setItems] = useState([]); //estado
 
-  console.log(items);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     askData()
       .then((resp) => {
         setItems(resp);
@@ -15,9 +17,11 @@ export const ItemListContainer = () => {
         console.log(err);
       })
       .finally(() => {
-        console.log("Peticion finalizada");
+        setLoading(false);
       });
   }, []);
 
-  return <div></div>;
+  return (
+    <div>{loading ? <h2> Loading ... </h2> : <ItemList items={items} />}</div>
+  );
 };
