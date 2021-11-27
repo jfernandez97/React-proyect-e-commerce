@@ -1,5 +1,4 @@
 import { ItemCount } from "./components/ItemCount/ItemCount";
-import { ItemList } from "./components/ItemList2/ItemList";
 import { NavBar } from "./components/NavBar/NavBar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CartView } from "./components/CartView/CartView";
