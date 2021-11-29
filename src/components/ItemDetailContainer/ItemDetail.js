@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
+import { CartContext } from "../../context/CartContext";
 import { useCounter } from "../../hooks/useCounter";
 import { ItemCount } from "../ItemCount/ItemCount";
 
 export const ItemDetail = ({ item }) => {
+  const { addToCart, isInCart } = useContext(CartContext);
+
   const { amount, handleAdd, handleSub } = useCounter(0, item.stock);
 
   const navigate = useNavigate();
@@ -13,13 +17,14 @@ export const ItemDetail = ({ item }) => {
   };
 
   const handleAddToCart = () => {
-    console.log("item agregado", {
-      id: item.id,
-      name: item.name,
-      brand: item.brand,
-      price: item.price,
-      amount: amount,
-    });
+    amount > 0 &&
+      addToCart({
+        id: item.id,
+        name: item.name,
+        brand: item.brand,
+        price: item.price,
+        amount: amount,
+      });
   };
 
   return (
@@ -28,13 +33,20 @@ export const ItemDetail = ({ item }) => {
       <h3>{item.name}</h3>
       <p>Precio :{item.price}</p>
       <p>Marca:{item.brand}</p>
-      <ItemCount
-        handleAdd={handleAdd}
-        handleSub={handleSub}
-        onAdd={handleAddToCart}
-        amount={amount}
-      />
-      <button className="btn btn-primary" onClick={handleBack}>
+      {!isInCart(item.id) ? (
+        <ItemCount
+          handleAdd={handleAdd}
+          handleSub={handleSub}
+          onAdd={handleAddToCart}
+          amount={amount}
+        />
+      ) : (
+        <Link to="/cart" className="btn btn-success m-2">
+          {" "}
+          Terminar mi compra{" "}
+        </Link>
+      )}
+      <button className="btn btn-primary m-2" onClick={handleBack}>
         Volver
       </button>
     </div>
