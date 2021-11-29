@@ -1,29 +1,37 @@
 import { Navbar } from "react-bootstrap";
 import { Nav } from "react-bootstrap";
 import { Container } from "react-bootstrap";
-import { NavDropdown } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { CartWidget } from "../CartWidget/CartWidget";
 import "./NavBar.scss";
 
 export const NavBar = () => {
   return (
-    <Navbar bg="light" expand="lg">
-      <Container className="container-fluid col-md-4">
-        <Navbar.Brand href="#home">ClothStore</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link to="/">Home</Nav.Link>
-            <Nav.Link to="/cart">Cart</Nav.Link>
-            <NavDropdown title="Categories" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Category 1</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">Category 2</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Category 3</NavDropdown.Item>
-            </NavDropdown>
-            <CartWidget />
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+    <header className="navbar px-5">
+      <Link to="/">
+        <h1>ClothStore</h1>
+      </Link>
+      <div id="navigation-bar">
+        <nav>
+          <ul>
+            <li>
+              <Link to="/category/zapatillas">Zapatillas</Link>
+            </li>
+            <li>
+              <Link to="/category/buzos">Buzos</Link>
+            </li>
+            <li>
+              <Link to="/category/camperas">Camperas</Link>
+            </li>
+            <li>
+              <Link to="/category/gorros">Gorros</Link>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <Link to="/cart">
+        <CartWidget />
+      </Link>
+    </header>
   );
 };

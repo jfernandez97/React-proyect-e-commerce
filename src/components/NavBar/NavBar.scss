@@ -1,0 +1,30 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #f1f158;
+  color: white;
+
+  h1 {
+    text-transform: uppercase;
+  }
+
+  nav {
+    width: 40%;
+    ul {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      list-style: none;
+      li {
+        margin: 1rem;
+      }
+    }
+  }
+}

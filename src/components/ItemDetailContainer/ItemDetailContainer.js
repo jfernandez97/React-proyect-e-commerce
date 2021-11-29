@@ -1,24 +1,24 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router";
 import { askItem } from "../../helpers/askItem";
 import { ItemDetail } from "./ItemDetail";
 
 export const ItemDetailContainer = () => {
   const [item, setItem] = useState(null);
-  console.log(item);
+
+  const [loading, setLoading] = useState(true);
+
+  const { itemId } = useParams();
+
   useEffect(() => {
-    askItem(1).then((resp) => setItem(resp));
+    setLoading(true);
+    askItem(Number(itemId))
+      .then((resp) => setItem(resp))
+      .finally(() => {
+        setLoading(false);
+      });
   }, []);
   return (
-    <div>
-      {/* {item && (
-        <ItemDetail
-          key={item.id}
-          name={item.name}
-          price={item.price}
-          brand={item.brand}
-          stock={item.stock}
-        />
-      )} */}
-    </div>
+    <div>{loading ? <h2> Loading... </h2> : <ItemDetail item={item} />}</div>
   );
 };
