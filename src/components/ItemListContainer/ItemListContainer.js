@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { askData } from "../../helpers/askData";
+import { db } from "../../firebase/config";
 import { ItemList } from "../ItemList/ItemList";
+import { Loader } from "../Loader/Loader";
+import { collection, getDocs, query, where } from "firebase/firestore/lite";
 
 export const ItemListContainer = () => {
   const [items, setItems] = useState([]); //estado
@@ -12,23 +14,27 @@ export const ItemListContainer = () => {
 
   useEffect(() => {
     setLoading(true);
-    askData()
+    //Creo referencia a la coleccion
+    const productsRef = collection(db, "products");
+    const q = categoryId
+      ? query(productsRef, where("category", "==", categoryId))
+      : productsRef;
+    //Llamamos a la referencia
+    getDocs(q)
       .then((resp) => {
-        if (categoryId) {
-          setItems(resp.filter((el) => el.category === categoryId));
-        } else {
-          setItems(resp);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
+        const products = resp.docs.map((doc) => {
+          return {
+            id: doc.id,
+            ...doc.data(),
+          };
+        });
+        console.log(products);
+        setItems(products);
       })
       .finally(() => {
         setLoading(false);
       });
   }, [categoryId]);
 
-  return (
-    <div>{loading ? <h2> Loading ... </h2> : <ItemList items={items} />}</div>
-  );
+  return <div>{loading ? <Loader /> : <ItemList items={items} />}</div>;
 };
