@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { useCounter } from "../../hooks/useCounter";
 
-export const ItemCount = ({ stock = 10, initial = 0 }) => {
-  const { amount, handleAdd, handleSub } = useCounter(initial, stock);
-
+export const ItemCount = ({ handleAdd, handleSub, onAdd, amount }) => {
   return (
     <div className="m-4">
       <button onClick={handleSub} className="btn btn-outline-primary">
@@ -14,7 +12,9 @@ export const ItemCount = ({ stock = 10, initial = 0 }) => {
         +
       </button>
       <div>
-        <button className="btn btn-success my-2">Add to Cart</button>
+        <button className="btn btn-success my-2" onClick={onAdd}>
+          Add to Cart
+        </button>
       </div>
     </div>
   );
