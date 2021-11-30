@@ -45,7 +45,7 @@ export const ItemDetail = ({ item }) => {
       ) : (
         <Link to="/cart" className="btn btn-success m-2">
           {" "}
-          Terminar mi compra{" "}
+          Ir al carrito{" "}
         </Link>
       )}
       <button className="btn btn-primary m-2" onClick={handleBack}>

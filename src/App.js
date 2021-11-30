@@ -5,6 +5,7 @@ import { CartView } from "./components/CartView/CartView";
 import { ItemListContainer } from "./components/ItemListContainer/ItemListContainer";
 import { ItemDetailContainer } from "./components/ItemDetailContainer/ItemDetailContainer";
 import { CartProvider } from "./context/CartContext";
+import { CheckOut } from "./components/CheckOut/CheckOut";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/category/:categoryId" element={<ItemListContainer />} />
           <Route path="/detail/:itemId" element={<ItemDetailContainer />} />
           <Route path="/cart" element={<CartView />} />
+          <Route path="/checkout" element={<CheckOut />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </BrowserRouter>
