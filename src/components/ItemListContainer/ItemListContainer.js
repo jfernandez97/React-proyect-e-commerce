@@ -28,7 +28,6 @@ export const ItemListContainer = () => {
             ...doc.data(),
           };
         });
-        console.log(products);
         setItems(products);
       })
       .finally(() => {
