@@ -1,11 +1,7 @@
-.loader {
-  width: 100 vh;
-  height: 100vh;
-  background-color: black;
+.visually-hidden {
+  display: block;
   position: fixed;
-  top: 0;
-  left: 0;
-
-  display: flex;
-  justify-content: center;
+  z-index: 1031;
+  top: 15px;
+  right: 15px;
 }

@@ -39,6 +39,8 @@ export const ItemDetail = ({ item }) => {
           handleSub={handleSub}
           onAdd={handleAddToCart}
           amount={amount}
+          min={0}
+          max={item.stock}
         />
       ) : (
         <Link to="/cart" className="btn btn-success m-2">
