@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
 import { Link } from "react-router-dom";
 import { FaTrash } from "react-icons/fa";
+import "../CartView/CartView.scss";
 
 export const CartView = () => {
   const { cart, emptyCart, totalBuy, removeFromCart } = useContext(CartContext);
