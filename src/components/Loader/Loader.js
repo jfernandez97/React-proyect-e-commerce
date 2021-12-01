@@ -7,8 +7,5 @@ export const Loader = () => {
     <Spinner animation="border" role="status">
       <span className="visually-hidden m-2">Loading...</span>
     </Spinner>
-    // <div className="loader">
-    //   <h2> Loading...</h2>
-    // </div>
   );
 };

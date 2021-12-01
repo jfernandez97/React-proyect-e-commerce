@@ -6,7 +6,7 @@ import { Loader } from "../Loader/Loader";
 import { collection, getDocs, query, where } from "firebase/firestore/lite";
 
 export const ItemListContainer = () => {
-  const [items, setItems] = useState([]); //estado
+  const [items, setItems] = useState([]);
 
   const [loading, setLoading] = useState(false);
 
@@ -14,12 +14,10 @@ export const ItemListContainer = () => {
 
   useEffect(() => {
     setLoading(true);
-    //Creo referencia a la coleccion
     const productsRef = collection(db, "products");
     const q = categoryId
       ? query(productsRef, where("category", "==", categoryId))
       : productsRef;
-    //Llamamos a la referencia
     getDocs(q)
       .then((resp) => {
         const products = resp.docs.map((doc) => {

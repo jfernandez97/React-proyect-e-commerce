@@ -4,9 +4,6 @@ import {
   Timestamp,
   collection,
   addDoc,
-  doc,
-  getDoc,
-  updateDoc,
   writeBatch,
   query,
   where,
@@ -15,7 +12,21 @@ import {
 } from "firebase/firestore/lite";
 import { db } from "../../firebase/config";
 import { Link } from "react-router-dom";
-import { Item } from "../ItemList/Item";
+import { Formik } from "formik";
+import * as Yup from "yup";
+
+const schema = Yup.object().shape({
+  name: Yup.string()
+    .required("Este campo es obligatorio.")
+    .min(4, "El nombre debe tener al menos 4 caracteres")
+    .max(30, "El nombre no puede superar los 30 caracteres"),
+  email: Yup.string()
+    .required("Este campo es obligatorio")
+    .email("Email invalido."),
+  tel: Yup.string()
+    .required("Este campo es obligatorio")
+    .min(8, "Debe tener al menos 8 numeros"),
+});
 
 export const CheckOut = () => {
   const [orderId, setOrderId] = useState(null);
@@ -74,22 +85,6 @@ export const CheckOut = () => {
     });
   };
 
-  const handleInputChange = (e) => {
-    setValues({
-      ...values,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (values.name.length > 4 && values.email.length > 5) {
-      generateOrder(values);
-    } else {
-      alert("Campos vacios");
-    }
-  };
-
   return (
     <div className="container my-5">
       {orderId ? (
@@ -105,36 +100,59 @@ export const CheckOut = () => {
         <>
           <h2>Resumen de compra</h2>
           <hr />
-          <form onSubmit={handleSubmit}>
-            <input
-              value={values.name}
-              onChange={handleInputChange}
-              name="name"
-              className="form-control my-2"
-              placeholder="Nombre y apellido"
-              type="text"
-            ></input>
-            <input
-              value={values.email}
-              onChange={handleInputChange}
-              name="email"
-              placeholder="Email"
-              className="form-control my-2"
-              type="text"
-            ></input>
-            <input
-              value={values.tel}
-              onChange={handleInputChange}
-              name="tel"
-              placeholder="Telefono"
-              className="form-control my-2"
-              type="text"
-            ></input>
-            <button type="submit" className="btn btn-success">
-              {" "}
-              Enviar
-            </button>
-          </form>
+          <Formik
+            initialValues={{
+              name: "",
+              email: "",
+              tel: "",
+            }}
+            validationSchema={schema}
+            onSubmit={(values) => {
+              generateOrder(values);
+            }}
+          >
+            {(formik) => (
+              <form onSubmit={formik.handleSubmit}>
+                <input
+                  value={formik.values.name}
+                  onChange={formik.handleChange}
+                  name="name"
+                  className="form-control my-2"
+                  placeholder="Nombre y apellido"
+                  type="text"
+                ></input>
+                {formik.touched.name && formik.errors.name && (
+                  <p className="alert alert-danger">{formik.errors.name}</p>
+                )}
+                <input
+                  value={formik.values.email}
+                  onChange={formik.handleChange}
+                  name="email"
+                  placeholder="Email"
+                  className="form-control my-2"
+                  type="text"
+                ></input>
+                {formik.touched.email && formik.errors.email && (
+                  <p className="alert alert-danger">{formik.errors.email}</p>
+                )}
+                <input
+                  value={formik.values.tel}
+                  onChange={formik.handleChange}
+                  name="tel"
+                  placeholder="Telefono"
+                  className="form-control my-2"
+                  type="text"
+                ></input>
+                {formik.touched.email && formik.errors.tel && (
+                  <p className="alert alert-danger">{formik.errors.tel}</p>
+                )}
+                <button type="submit" className="btn btn-success">
+                  {" "}
+                  Enviar
+                </button>
+              </form>
+            )}
+          </Formik>
         </>
       )}
     </div>
