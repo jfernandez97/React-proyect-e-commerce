@@ -28,7 +28,7 @@ export const ItemDetail = ({ item }) => {
   };
 
   return (
-    <div className="card col-12 m-2 col-md-3">
+    <div className="card detail col-12 m-2 col-md-3">
       <img className="m-2" src={item.img} alt={item.name} />
       <h3>{item.name}</h3>
       <p>Precio :{item.price}</p>

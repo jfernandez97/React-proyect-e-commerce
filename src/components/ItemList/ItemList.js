@@ -1,9 +1,10 @@
 import React from "react";
 import { Item } from "./Item";
+import "./ItemList.scss";
 
 export const ItemList = ({ items = [] }) => {
   return (
-    <div className="container row my-5">
+    <div className="container list row my-5">
       {items.length > 0 ? (
         <h2> Productos </h2>
       ) : (

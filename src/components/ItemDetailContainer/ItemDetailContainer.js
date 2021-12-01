@@ -4,6 +4,7 @@ import { Loader } from "../Loader/Loader";
 import { ItemDetail } from "./ItemDetail";
 import { collection, doc, getDoc } from "firebase/firestore/lite";
 import { db } from "../../firebase/config";
+import "./ItemDetailContainer.scss";
 
 export const ItemDetailContainer = () => {
   const [item, setItem] = useState(null);
@@ -29,5 +30,9 @@ export const ItemDetailContainer = () => {
         setLoading(false);
       });
   }, []);
-  return <div>{loading ? <Loader /> : <ItemDetail item={item} />}</div>;
+  return (
+    <div className="container detail_cont row col-12 my-5">
+      {loading ? <Loader /> : <ItemDetail item={item} />}
+    </div>
+  );
 };
