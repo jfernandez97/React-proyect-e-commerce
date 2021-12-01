@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { FaTrash } from "react-icons/fa";
 import "../CartView/CartView.scss";
 
-export const CartView = () => {
+export const CartView = ({}) => {
   const { cart, emptyCart, totalBuy, removeFromCart } = useContext(CartContext);
 
   if (cart.length === 0) {
