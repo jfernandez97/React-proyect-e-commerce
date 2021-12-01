@@ -3,28 +3,25 @@
   margin: 0;
   padding: 0;
 }
-.navbar {
-  display: flex;
+
+// .me-auto {
+//   width: 100%;
+// }
+// .container {
+//   padding: 0;
+//   margin: 0;
+//   display: flex;
+//   justify-content: space-between;
+// }
+.cart-widget {
+  text-decoration: none;
+}
+a {
+  text-decoration: none !important;
+}
+.navbar-brand {
+  text-decoration: none !important;
+}
+.me-auto {
   justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  background-color: #f1f158;
-  color: white;
-
-  h1 {
-    text-transform: uppercase;
-  }
-
-  nav {
-    width: 40%;
-    ul {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      list-style: none;
-      li {
-        margin: 1rem;
-      }
-    }
-  }
 }
