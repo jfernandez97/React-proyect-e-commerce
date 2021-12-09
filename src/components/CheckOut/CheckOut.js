@@ -23,7 +23,10 @@ const schema = Yup.object().shape({
   email: Yup.string()
     .required("Este campo es obligatorio")
     .email("Email invalido."),
-  tel: Yup.string()
+  tel: Yup.number()
+    .typeError("Lo que acaba de ingresar no parece un numero de telefono")
+    .positive("Un numero de telefono no puede comenzar con un menos")
+    .integer("El numero de telefono no puede incluir decimales")
     .required("Este campo es obligatorio")
     .min(8, "Debe tener al menos 8 numeros"),
 });
